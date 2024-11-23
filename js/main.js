@@ -1,7 +1,7 @@
 document.getElementById("submitBtn").addEventListener("click", function(event) {
     event.preventDefault(); 
     if (validForm()){
-        addBookmark();
+        run();
     } else {
         showAlert();
     }
@@ -21,6 +21,11 @@ if (localStorage.getItem("Bookmark") == null) {
     bookmarkList = JSON.parse(localStorage.getItem("Bookmark"));
 }
 
+function run(){
+    addBookmark();
+    clearForm();
+    display();
+}
 function addBookmark() {
     var bookmark = {
         Name: bookmarkName.value,
@@ -29,8 +34,7 @@ function addBookmark() {
 
     bookmarkList.push(bookmark);
     localStorage.setItem("Bookmark", JSON.stringify(bookmarkList));
-    clearForm();
-    display();
+  
 }
 
 function display() {
@@ -85,4 +89,4 @@ closeBtn.addEventListener("click", function() {
     boxInfo.classList.add("d-none");
 });
 
-
+document.addEventListener("DOMContentLoaded", display);
